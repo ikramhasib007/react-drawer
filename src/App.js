@@ -37,7 +37,7 @@ class App extends Component {
       () => {
         // complete function ....
         storage
-          .ref("images")
+          .ref("audioFile")
           .child(audio.name)
           .getDownloadURL()
           .then((url) => {
@@ -55,6 +55,7 @@ class App extends Component {
       alignItems: "center",
       justifyContent: "center"
     };
+
     return (
       <div style={style}>
         <progress value={this.state.progress} max="100" />
@@ -62,12 +63,17 @@ class App extends Component {
         <input type="file" onChange={this.handleChange} />
         <button onClick={this.handleUpload}>Upload</button>
         <br />
-        <img
-          src={this.state.url || "http://via.placeholder.com/400x300"}
-          alt="Uploaded  audio"
-          height="300"
-          width="400"
-        />
+
+        <figure>
+          <figcaption>Uploaded Audio</figcaption>
+          <audio
+            controls
+            src={this.state.url || ""}>
+                Your browser does not support the
+                  <code>audio</code> element.
+          </audio>
+        </figure>
+
       </div>
     );
   }
